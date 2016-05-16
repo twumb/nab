@@ -1,105 +1,209 @@
-<div class="row" ng-init="init()">
+<div class="main_text row" ng-init="init()">
+
   <div class="col-lg-12">
-  <ol class="breadcrumb">
-  <li><a href="#">Home</a></li>
-  <li><a href="#">Library</a></li>
-  <li class="active">Data</li>
-</ol>
-    <rd-widget>
-      <rd-widget-header icon="fa-building" title="Sanctuaries">
-        <a href ng-click="newSetup()">New Sanctuary</a>
-      </rd-widget-header>
-      <rd-widget-body classes="large no-padding">
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Sanctuary </th>
-                <th> Name of Pastor</th>
-                <th> Contact of Pastor</th>
-                <th> Email of Pastor</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="n in sanctuaryList">
-              <td>{{n.sanctuary}}</td>
-              <td>{{n.pastor_name}}</td>
-              <td>{{n.pastor_contact}}</td>
-              <td>{{n.pastor_email}}</td>
-              </tr>
-              
-          </table>
-        </div>      
-      </rd-widget-body>
-      <rd-widget-footer>
-       <!-- <ul class="pagination pagination-sm pull-right">
-          <li><a href="#">&laquo;</a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li><a href="#">&raquo;</a></li>
-        </ul>-->
-        <div class="clearfix"></div>
-      </rd-widget-footer>
-    </rd-widget>
-  </div>
+    <!--  Header menu -->
+    <ol class="breadcrumb">
+      <li class="link"><a href ng-click="setTab(1)">Categories</a></li>
+      <li class="link"><a href ng-click="setTab(2)">Clients</a></li>
+      <li class="link"><a href ng-click="setTab(3)">Users</a></li>
+
+    </ol>
+
+    <!-- First menu selection  -->
+    <div class="tab" ng-show="isSet(1)">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="pull-left">
+                  Category Listing 
+                </div>
+                <div class="pull-right">
+                  <a href ng-click="addCategory()"><i class="fa fa-plus"></i> Add </a>
+                </div>
+                <div class="clearfix">
+              </div>
+            </div> <!-- end of panel heading -->
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th width="40%">Name</th>
+                      <th width="60%">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="d in categoriesList">
+                      <td>{{d.name}}</td>
+                      <td>{{d.description}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div><!-- end of panel body -->
+          </div>  <!-- end of panel-->   
+        </div>
+      </div>
 
 
+    </div>
 
-</div>
-  <script type="text/ng-template" id="newMemberModal.html">
-        <div class="modal-header">
-            
-            <button type="button" class="close" data-dismiss="modal" ng-click="closeMemberModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Sanctuary Setup Form</h4>
+    <!-- Second menu selection  -->
+    <div class="tab" ng-show="isSet(2)">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="pull-left">
+                  Clients Listing 
+                </div>
+                <div class="pull-right">
+                  <a href ng-click="addClient()"><i class="fa fa-plus"></i> Add</a>
+                </div>
+                <div class="clearfix">
+              </div>
+            </div> <!-- end of panel heading -->
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th width="60%">Name</th>
+                      <th width="40%">Contact</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="d in clientList">
+                      <td>{{d.name}}</td>
+                      <td>{{d.contact}}</td>
+
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div><!-- end of panel body -->
+          </div>  <!-- end of panel-->   
+        </div>
+      </div>
+      
+
+    </div>
+
+
+    <!-- Third menu selection  -->
+    <div class="tab" ng-show="isSet(3)">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="pull-left">
+                  Users Listing 
+                </div>
+                <div class="pull-right">
+                  <a href ng-click="addUser()"><i class="fa fa-plus"></i> Add</a>
+                </div>
+                <div class="clearfix">
+              </div>
+            </div> <!-- end of panel heading -->
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th width="60%">Name</th>
+                      <th width="40%">Client</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="d in userList">
+                      <td>{{d.name}}</td>
+                      <td>{{d.client.name}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div><!-- end of panel body -->
+          </div>  <!-- end of panel-->   
+        </div>
+      </div>
+      
+
+    </div>
+
+<script type="text/ng-template" id="categoryModal.html">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" ng-click="closeModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="modal-title">New Category</span>
         </div>
         <div class="modal-body">
-                   <div class="tab-pane" id="personal">
-
-                <div class="form-group">
-                    <label class="control-label">Sanctuary</label>
-                    <input type="text" class="form-control" ng-model="member.sanctuary" />
-                </div>
-                
-                <div class="form-group">
-                    <label class="control-label">District</label>
-                    <input type="text" class="form-control"  ng-model="member.district"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label">Region</label>
-                    <select class="form-control" ng-model="member.region">
-                      <option>Greater Accra</option>
-                      <option>Ashanti</option>
-                      <option>Western</option>
-                      <option>Eastern</option>
-                      <option>Central</option>
-                      <option>Volta</option>
-                      <option>Brong Ahafo</option>
-                      <option>Northern</option>
-                      <option>Upper East</option>
-                      <option>Upper West</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Name of Pastor </label>
-                    <input type="text"  class="form-control" ng-model="member.pastor_name"/>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Contact of Pastor</label>
-                    <input type="text" class="form-control"  ng-model="member.pastor_contact"/>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Email of Pastor</label>
-                    <input type="text"  class="form-control"  ng-model="member.pastor_email"/>
-                </div>
-
-                
+          <div class="form-group">
+              <label class="control-label">Name</label>
+              <input type="text" class="form-control" ng-model="temp.name" ng-readonly="temp_read"   >         
           </div>
-           <div class="modal-footer">
-        <button type="button" class="btn btn-primary" ng-click="create()">Save</button>
-      </div>
+           <div class="form-group">
+              <label class="control-label">Description</label>
+              <textarea class="form-control" ng-model="temp.description"></textarea>         
+          </div>
         </div>
-    </script>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" ng-click="saveTemp(1)">Save</button>
+      </div>
+</script>
+   
+
+
+<script type="text/ng-template" id="clientModal.html">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" ng-click="closeModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="modal-title">New Client</span>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+              <label class="control-label">Name</label>
+              <input type="text" class="form-control" ng-model="temp.name" ng-readonly="temp_read">         
+          </div>
+          <div class="form-group">
+              <label class="control-label">Contact</label>
+              <input type="text" class="form-control" ng-model="temp.contact">
+          </div>
+          <div class="form-group">
+              <label class="control-label">Location</label>
+              <input type="text" class="form-control" ng-model="temp.location">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" ng-click="saveTemp(2)">Save</button>
+      </div>
+</script>   
+
+
+<script type="text/ng-template" id="userModal.html">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" ng-click="closeModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="modal-title">New User</span>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+              <label class="control-label">Name</label>
+              <input type="text" class="form-control" ng-model="temp.name" ng-readonly="temp_read">         
+          </div>
+          <div class="form-group">
+              <label class="control-label">Email Address</label>
+              <input type="text" class="form-control" ng-model="temp.username" ng-readonly="temp_read">         
+          </div>
+          <div class="form-group">
+              <label class="control-label">Contact</label>
+              <input type="text" class="form-control" ng-model="temp.contact" ng-readonly="temp_read">         
+          </div>
+           <div class="form-group">
+              <label class="control-label">Client</label>
+              <select class="form-control" ng-model="temp.client">
+                <option ng-repeat="d in clientList" value="{{d._id}}">{{d.name}}</option>
+              </select>       
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" ng-click="saveTemp(3)">Save</button>
+      </div>
+</script>

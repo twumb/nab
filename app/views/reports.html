@@ -1,0 +1,150 @@
+<div class="row">
+
+  <div class="col-lg-12">
+    <!--  Header menu -->
+    <ol class="breadcrumb">
+      <li class="link"><a href ng-click="setTab(1)">Institution</a></li>
+      <li class="link"><a href ng-click="setTab(2)">Clients</a></li>
+    </ol>
+
+    <!-- First menu selection  -->
+    <div class="tab" ng-show="isSet(1)">
+		<div class="col-md-5">
+			<div class="panel panel-default" >
+			<div class="panel-heading">Reporting</div>
+				<div class="panel-body">
+				    <div class="table-responsive">
+	                <table class="table table-striped">
+	                  <thead>
+	                    <tr>
+	                      <th width="80%">Institution</th>
+	                      <th width="20%">Number</th>
+	                    </tr>
+	                  </thead>
+	                  <tbody>
+	                    <tr ng-repeat="d in categoryList">
+	                      <td>{{d.name}}</td>
+	                    </tr>
+	                  </tbody>
+	                </table>
+	              </div>
+	            </div>
+            </div>
+		</div>      
+		<div class="col-md-7">
+		</div>
+    </div>
+
+    <!-- Second menu selection  -->
+    <div class="tab" ng-show="isSet(2)">
+    	<div class="col-md-5">
+    	</div>
+    	<div class="col-md-7">
+    	</div>
+    </div>
+
+
+    <!-- Third menu selection  -->
+    <div class="tab" ng-show="isSet(3)">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="pull-left">
+                  Users Listing 
+                </div>
+                <div class="pull-right">
+                  <a href ng-click="addUser()"><i class="fa fa-plus"></i> Add</a>
+                </div>
+                <div class="clearfix">
+              </div>
+            </div> <!-- end of panel heading -->
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th width="40%">Name</th>
+                      <th width="60%">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="d in categoryList">
+                      <td>{{d.name}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div><!-- end of panel body -->
+          </div>  <!-- end of panel-->   
+        </div>
+      </div>
+      
+
+    </div>
+
+<script type="text/ng-template" id="categoryModal.html">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" ng-click="closeModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="modal-title">New Category</span>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+              <label class="control-label">Name</label>
+              <input type="text" class="form-control" ng-model="temp.code" ng-readonly="temp_read"   >         
+          </div>
+           <div class="form-group">
+              <label class="control-label">Description</label>
+              <textarea class="form-control" ng-mode="temp.description"></textarea>         
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" ng-click="saveTemp(1)">Save</button>
+      </div>
+</script>
+   
+<script type="text/ng-template" id="clientModal.html">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" ng-click="closeModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="modal-title">New Category</span>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+              <label class="control-label">Name</label>
+              <input type="text" class="form-control" ng-model="temp.code" ng-readonly="temp_read"   >         
+          </div>
+           <div class="form-group">
+              <label class="control-label">Location</label>
+              <textarea class="form-control" ng-mode="temp.location"></textarea>         
+          </div>
+          <div class="form-group">
+              <label class="control-label">Contact</label>
+              <input type="text" class="form-control" ng-model="temp.contact" ng-readonly="temp_read"   >         
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" ng-click="saveTemp(2)">Save</button>
+      </div>
+</script>
+
+<script type="text/ng-template" id="userModal.html">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" ng-click="closeModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="modal-title">New User</span>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+              <label class="control-label">Name</label>
+              <input type="text" class="form-control" ng-model="temp.name" ng-readonly="temp_read">         
+          </div>
+           <div class="form-group">
+              <label class="control-label">Client</label>
+              <select class="form-control" ng-model="temp.client">
+                <option ng-repeat="d in clientList" value="{{d._id}}">{{d.name}}</option>
+              </select>       
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" ng-click="saveTemp(1)">Save</button>
+      </div>
+</script>

@@ -4,40 +4,26 @@
       <ul class="sidebar">
         <li class="sidebar-main">
           <a ng-click="toggleSidebar()">
-            FishReg
+            NAB
             <span class="menu-icon glyphicon glyphicon-transfer"></span>
           </a>
         </li>
         <li class="sidebar-title"><span>NAVIGATION</span></li>
         <li class="sidebar-list" ng-class="{selected:isSel(0)}">
-          <a href="#/app/dashboard" ng-click="setSel(o)">Dashboard </a>
+          <a href="#/app/dashboard" ng-click="setSel(0)">Dashboard </a>
         </li>
         <li class="sidebar-list" ng-class="{selected:isSel(1)}">
-          <a href="#/app/industrial" ng-click="setSel(1)">Industrial Vessels </span></a>
+          <a href="#/app/search" ng-click="setSel(1)">Search</span></a>
         </li>
         <li class="sidebar-list" ng-class="{selected:isSel(2)}">
-          <a href="#/app/semi-industrial"ng-click="setSel(2)" ng-click="setSet(1)">Semi-industrial Vessels </a>
+          <a href="#/app/institution" ng-click="setSel(2)">Institutions</span></a>
         </li>
         <li class="sidebar-list" ng-class="{selected:isSel(3)}">
-          <a href="#/app/marine" ng-click="setSel(3)">Marine Canoes </a>
+          <a href="#/app/reports" ng-click="setSel(3)">Reports</span></a>
         </li>
         <li class="sidebar-list" ng-class="{selected:isSel(4)}">
-          <a href="#/app/mcs" ng-click="setSel(4)">MCS Activity </a>
+          <a href="#/app/setup" ng-click="setSet(4)">Setup</a>
         </li>
-        <li class="sidebar-list" ng-class="{selected:isSel(5)}">
-          <a href="#/app/datareporting" ng-click="setSel(5)">Data Reporting </a>
-        </li>
-        <li class="sidebar-list" ng-class="{selected:isSel(6)}">
-          <a href="#/app/auxiliary" ng-click="setSel(6)">Auxiliary Data </a>
-        </li>
-        <li class="sidebar-list" ng-class="{selected:isSel(7)}">
-          <a href="#/app/register" ng-click="setSel(7)">Register Audit Log </a>
-        </li>
-        <li class="sidebar-list" ng-class="{selected:isSel(8)}">
-          <a href="#/app/administrator" ng-click="setSel(8)">Administrator </a>
-        </li>
-
-
       </ul>
       <div class="sidebar-footer">
         <div class="col-xs-3">
@@ -62,30 +48,13 @@
           <div class="col-xs-12">
             <div class="user pull-right">
             <img src="images/coat.jpg" style="height:55px">
-              <!--<div class="item dropdown" uib-dropdown>
-                <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
-                  <img src="img/avatar.jpg">
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right">
-                  <li class="link">
-                    <a href="#">
-                      Logout
-                    </a>
-                  </li>
-                </ul>
-              </div> -->
             </div>
             <div class="meta">
               <div class="page"> 
-                Ministry of Fisheries and Aquaculture Development - 
-                Fisheries Commission
+                National Accreditation Board - Ghana
               </div>
               <div class="breadcrumb-links">
                  <span style="font-size:1.2em">{{headingData}} </span>
-                <!--<ol class="breadcrumb">
-                  <li ng-repeat="d in bread"><a href="{{d.link}}">{{d.name}}</a></li>
-                </ol> -->
-
               </div>
             </div>
           </div>

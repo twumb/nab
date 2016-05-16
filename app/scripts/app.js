@@ -20,8 +20,8 @@ angular
         startingDay: 1
       };
   })
-  .constant('REMOTE', 'http://localhost:8050/api/')
-  //.constant('REMOTE', 'http://icgc.etribegh.com:8050/api/')
+   .constant('REMOTE', 'http://localhost:8010/api/')
+  //.constant('REMOTE', 'http://icgc.etribegh.com:8010/api/')
   .config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
         // For unmatched routes
@@ -31,154 +31,114 @@ angular
             .state('index', {
                 url: '/',
                 templateUrl: 'views/sign.html', 
-                controller:'LoginCtrl'
+                controller:'LoginController'
             }).
-            state('active_industrial', {
-                url: '/active_industrial',
-                templateUrl: 'views/actind.html', 
-                controller:'ActiveCtrl'
-            })
-            .state('active_semi_industrial', {
-                url: '/active_semi_industrial',
-                templateUrl: 'views/actsemi.html', 
-                controller:'ActiveCtrl'
-            }).
-
              state('app', {
                 url:'/app',
                 abstract:true, 
                 templateUrl:'views/main.html', 
-                controller:'MasterCtrl'
-             }).
-             state('app.dashboard', {
+                controller:'MasterController'
+             })
+             .state('app.dashboard', {
                 url:'/dashboard',
                 views:{
                            'contentArea':{ 
                                 templateUrl:'views/dashboard.html', 
-                                controller: 'DashCtrl'
+                                controller: 'DashController'
                               }
                         }
              })
-
-              .state('app.tables', {
-                url: '/tables',
-                //templateUrl: 'views/tables.html', 
-                //controller:'EnteriesCtrl'
+              .state('app.institution', {
+                url: '/institution',
                 views:{
                            'contentArea':{ 
-                                templateUrl:'views/tables.html', 
-                                controller: 'EnteriesCtrl'
+                                templateUrl:'views/institutions.html', 
+                                controller: 'InstitutionController'
                               }
                         }
             })
-             .state('app.setup', {
-                url: '/setup',
-                //templateUrl: 'views/setup.html', 
-                //controller:'SetupCtrl'
+             .state('app.search', {
+                url: '/search',
+                views:{
+                           'contentArea':{ 
+                                templateUrl:'views/search.html', 
+                                controller: 'SearchController'
+                              }
+                        }
+
+            })
+            .state('app.reports',{
+              url: '/reports',
+                views:{
+                           'contentArea':{ 
+                                templateUrl:'views/reports.html', 
+                                controller: 'ReportController'
+                              }
+                        }
+
+            })
+            .state('app.setup',{
+              url: '/setup',
                 views:{
                            'contentArea':{ 
                                 templateUrl:'views/setup.html', 
-                                controller: 'SetupCtrl'
+                                controller: 'SetupController'
                               }
                         }
 
-            })
-             //starting proper 
-            .state('app.industrial',{
-              url: '/industrial',
-                /*views:{
-                           'contentArea':{ 
-                                templateUrl:'views/industrial.html', 
-                                controller: 'IndustrialCtrl'
-                              }
-                        }*/
-                views:{
-                           'contentArea':{ 
-                                templateUrl:'views/indust.html', 
-                                controller: 'IndustCtrl'
-                              }
-                        }
-
-            })
-
-            .state('app.administrator',{
-              url: '/administrator',
-                views:{
-                           'contentArea':{ 
-                                templateUrl:'views/administrator.html', 
-                                controller: 'AdminCtrl'
-                              }
-                        }
-
-            })
-
-            .state('app.semi-industrial',{
-              url: '/semi-industrial',
-                views:{
-                           'contentArea':{ 
-                                templateUrl:'views/semi-industrial.html', 
-                                controller: 'SemiIndustrialCtrl'
-                              }
-                        }
-            
-
-            })
-            .state('app.marine',{
-              url: '/marine',
-                views:{
-                           'contentArea':{ 
-                                templateUrl:'views/marine.html', 
-                                controller: 'MarineCtrl'
-                              }
-                        }
-            
-
-            })
-            .state('app.mcs',{
-              url: '/mcs',
-                views:{
-                           'contentArea':{ 
-                                templateUrl:'views/mcs.html', 
-                                controller: 'McsCtrl'
-                              }
-                        }
-            
-
-            })
-            .state('app.datareporting',{
-              url: '/datareporting',
-                views:{
-                           'contentArea':{ 
-                                templateUrl:'views/datareporting.html', 
-                                controller: 'DataReportingCtrl'
-                              }
-                        }
-            
-
-            })
-            .state('app.auxiliary',{
-              url: '/auxiliary',
-                views:{
-                           'contentArea':{ 
-                                templateUrl:'views/auxiliary.html', 
-                                controller: 'AuxiliaryCtrl'
-                              }
-                        }
-            
-
-            })
-            .state('app.register',{
-              url: '/register',
-                views:{
-                           'contentArea':{ 
-                                templateUrl:'views/register.html', 
-                                controller: 'RegisterCtrl'
-                              }
-                        }
-            
-
-            })
-
-             ;
+            });
     }
-]);
+])
+.directive('rdLoading', function() {
+   var directive = {
+        restrict: 'AE',
+        template: '<div class="loading"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>'
+    };
+    return directive;
+  })
+.directive('rdWidgetBody', function(){
+
+     var directive = {
+        requires: '^rdWidget',
+        scope: {
+            loading: '@?',
+            classes: '@?'
+        },
+        transclude: true,
+        template: '<div class="widget-body" ng-class="classes"><rd-loading ng-show="loading"></rd-loading><div ng-hide="loading" class="widget-content" ng-transclude></div></div>',
+        restrict: 'E'
+    };
+    return directive;
+}).directive('rdWidgetFooter', function(){
+
+   var directive = {
+        requires: '^rdWidget',
+        transclude: true,
+        template: '<div class="widget-footer" ng-transclude></div>',
+        restrict: 'E'
+    };
+    return directive;
+}).directive('rdWidgetHeader', function(){
+      var directive = {
+        requires: '^rdWidget',
+        scope: {
+            title: '@',
+            icon: '@'
+        },
+        transclude: true,
+        template: '<div class="widget-header"><div class="row"><div class="pull-left"><i class="fa" ng-class="icon"></i> {{title}} </div><div class="pull-right col-xs-6 col-sm-4" ng-transclude></div></div></div>',
+        restrict: 'E'
+    };
+    return directive;
+}).directive('rdWidget', function(){
+      var directive = {
+        transclude: true,
+        template: '<div class="widget" ng-transclude></div>',
+        restrict: 'EA'
+    };
+    return directive;
+
+    function link(scope, element, attrs) {
+        /* */
+    }
+})
